@@ -5,7 +5,7 @@ function showVideo(videoId) {
     modal.style.display = 'block';
 }
 
-function closeVideoModal() {
+function closeVideo() {
     var modal = document.getElementById('videoModal');
     modal.style.display = 'none';
     var video = document.getElementById('modalVideo');
