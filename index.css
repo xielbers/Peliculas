@@ -1,5 +1,4 @@
 * {
-    padding: 5px;
     font-family: "Cabin", sans-serif;
     font-optical-sizing: auto;
     font-weight: <weight>;
@@ -8,17 +7,6 @@
     "wdth" 100;
 }
 
-#appActualizacion {
-    display: none; /* Inicialmente oculto */
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    color: #f00;
-    background-color: #fff;
-    font-size: 200%;
-    top: 0;
-    left: 0;
-    z-index: 9999; /* Asegura que el div esté por encima de otros elementos */
-    justify-content: center; /* Centra el contenido horizontalmente si se usa display: flex */
-    align-items: center; /* Centra el contenido verticalmente si se usa display: flex */
+body {
+    margin: 5px;
 }
