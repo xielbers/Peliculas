@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+    <script src="index.js"></script>
     <title>Reproductor de Video</title>
 </head>
 <body>
     <div id="controls">
         <button id="playPauseBtn">Play/Pause</button>
+        <input type="number" id="hoursInput" placeholder="Horas" min="0" max="0" disabled>
+        <input type="number" id="minutesInput" placeholder="Minutos" min="0" max="59">
+        <input type="number" id="secondsInput" placeholder="Segundos" min="0" max="59">
+        <button id="seekBtn">Ir</button>
     </div>
     <video controls playsinline id="playerVideo"></video>
-    <div id="timeDisplay">
-        <span id="currentTime">00:00</span> / <span id="totalDuration">00:00</span>
-    </div>
-    <div id="seekBar">
-        <div id="seekBarFill"></div>
-        <div id="seekBarHandle"></div>
-    </div>
 </body>
 </html>

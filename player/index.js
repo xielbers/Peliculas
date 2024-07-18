@@ -2,10 +2,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var videoId = localStorage.getItem('videoId');
     var video = document.getElementById('playerVideo');
     var playPauseBtn = document.getElementById('playPauseBtn');
-    var hoursInput = document.getElementById('hoursInput');
-    var minutesInput = document.getElementById('minutesInput');
-    var secondsInput = document.getElementById('secondsInput');
-    var seekBtn = document.getElementById('seekBtn');
+    var timeDisplay = document.getElementById('timeDisplay');
+    var currentTimeDisplay = document.getElementById('currentTime');
+    var totalDurationDisplay = document.getElementById('totalDuration');
+    var seekBarFill = document.getElementById('seekBarFill');
+    var seekBarHandle = document.getElementById('seekBarHandle');
     var controls = document.getElementById('controls');
 
     let hideControlsTimeout;
@@ -27,22 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
         video.src = 'https://pixeldrain.com/api/file/' + videoId;
 
         video.addEventListener('loadedmetadata', function() {
-            var durationInSeconds = video.duration;
-
-            // Calcular y establecer el límite máximo de horas
-            var maxHours = Math.floor(durationInSeconds / 3600);
-            hoursInput.max = maxHours;
-            hoursInput.disabled = false;
-
-            // Ocultar input de horas si el máximo es 0
-            if (maxHours === 0) {
-                hoursInput.style.display = 'none';
-            }
-
-            // Limitar los minutos si el video es menor a 1 hora
-            if (durationInSeconds < 3600) {
-                minutesInput.max = Math.floor((durationInSeconds % 3600) / 60);
-            }
+            var duration = video.duration;
+            var durationFormatted = formatTime(duration);
+            totalDurationDisplay.textContent = durationFormatted;
         });
 
         var savedTime = localStorage.getItem('videoTime_' + videoId);
@@ -55,7 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         video.addEventListener('timeupdate', function() {
             var currentTime = video.currentTime - 15;
-            localStorage.setItem('videoTime_' + videoId, currentTime > 0 ? currentTime : 0);
+            var currentTimeFormatted = formatTime(currentTime);
+            currentTimeDisplay.textContent = currentTimeFormatted;
+
+            var progress = (video.currentTime / video.duration) * 100;
+            seekBarFill.style.width = progress + '%';
+            seekBarHandle.style.left = progress + '%'; // Mover el manejador junto con el progreso
         });
 
         video.addEventListener('ended', function() {
@@ -75,34 +68,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    seekBtn.addEventListener('click', function() {
-        var hours = parseFloat(hoursInput.value) || 0;
-        var minutes = parseFloat(minutesInput.value) || 0;
-        var seconds = parseFloat(secondsInput.value) || 0;
+    document.addEventListener('keydown', function(event) {
+        var duration = video.duration;
 
-        // Limitar los valores de minutos y segundos según la duración del video
-        var durationInSeconds = video.duration;
-        if (durationInSeconds < 3600) {
-            hours = 0;
-            hoursInput.value = 0;
-        }
-        if (durationInSeconds < 60) {
-            minutes = 0;
-            minutesInput.value = 0;
-        }
-        if (minutes > 59) {
-            minutes = 59;
-            minutesInput.value = 59;
-        }
-        if (seconds > 59) {
-            seconds = 59;
-            secondsInput.value = 59;
-        }
-
-        var seekTime = (hours * 3600) + (minutes * 60) + seconds;
-
-        if (!isNaN(seekTime) && seekTime >= 0 && seekTime <= durationInSeconds) {
-            video.currentTime = seekTime;
+        if (event.key === 'ArrowLeft') {
+            // Retroceder 10 segundos
+            video.currentTime -= 10;
+        } else if (event.key === 'ArrowRight') {
+            // Avanzar 10 segundos
+            video.currentTime += 10;
+        } else if (event.key === 'ArrowUp') {
+            // Aumentar volumen
+            if (video.volume < 1) {
+                video.volume += 0.1;
+            }
+        } else if (event.key === 'ArrowDown') {
+            // Disminuir volumen
+            if (video.volume > 0) {
+                video.volume -= 0.1;
+            }
+        } else if (event.key === ' ') {
+            // Play/Pause con la barra espaciadora
+            if (video.paused) {
+                video.play();
+                playPauseBtn.textContent = 'Pause';
+            } else {
+                video.pause();
+                playPauseBtn.textContent = 'Play';
+            }
         }
     });
+
+    function formatTime(time) {
+        var hours = Math.floor(time / 3600);
+        var minutes = Math.floor((time % 3600) / 60);
+        var seconds = Math.floor(time % 60);
+        
+        var formattedTime = '';
+
+        if (hours > 0) {
+            formattedTime += hours + ':';
+        }
+        
+        formattedTime += (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+        return formattedTime;
+    }
 });
