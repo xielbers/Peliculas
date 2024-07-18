@@ -1,14 +1,27 @@
-function showVideo(videoId) {
-    var modal = document.getElementById('videoModal');
-    var video = document.getElementById('modalVideo');
-    video.src = 'https://pixeldrain.com/api/file/' + videoId;
-    modal.style.display = 'block';
+function VideoID(videoId) {
+    localStorage.setItem('videoId', videoId);
+    window.location.href = 'player/player.html';
 }
 
-function closeVideo() {
-    var modal = document.getElementById('videoModal');
-    modal.style.display = 'none';
-    var video = document.getElementById('modalVideo');
-    video.pause();
-    video.src = '';
+function InAPP(versionCliente) {
+    var Elemento = document.getElementById('down');
+    var Download = document.getElementById('appActualizacion');
+
+    var versionNecesaria = '18/7/24';
+    if(versionCliente == '' || versionCliente == null) {
+        location.reload();
+    } else {
+        // Verificar si el elemento existe y si la versión del cliente es correcta
+        if (Elemento && versionCliente === versionNecesaria) {
+        // Eliminar el elemento
+        Elemento.parentNode.removeChild(Elemento);
+        console.log('Versión correcta');
+        } else {
+        console.error('Versión incorrecta');
+        // Evitar el scroll
+        document.body.style.overflow = 'hidden';
+        // Mostrar el div de actualización
+        Download.style.display = 'flex';
+        }
+    }
 }
