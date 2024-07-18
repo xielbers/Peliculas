@@ -6,6 +6,22 @@ document.addEventListener('DOMContentLoaded', function() {
     var minutesInput = document.getElementById('minutesInput');
     var secondsInput = document.getElementById('secondsInput');
     var seekBtn = document.getElementById('seekBtn');
+    var controls = document.getElementById('controls');
+
+    let hideControlsTimeout;
+
+    function resetHideControlsTimeout() {
+        clearTimeout(hideControlsTimeout);
+        controls.style.opacity = '1';
+        hideControlsTimeout = setTimeout(function() {
+            controls.style.opacity = '0';
+        }, 5500);
+    }
+
+    document.addEventListener('mousemove', resetHideControlsTimeout);
+    document.addEventListener('touchstart', resetHideControlsTimeout);
+
+    resetHideControlsTimeout();
 
     if (videoId) {
         video.src = 'https://pixeldrain.com/api/file/' + videoId;
@@ -25,20 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Limitar los minutos si el video es menor a 1 hora
             if (durationInSeconds < 3600) {
-                minutesInput.max = Math.floor(durationInSeconds / 60);
-            } else {
-                minutesInput.max = 59; // Límite máximo estándar de minutos
+                minutesInput.max = Math.floor((durationInSeconds % 3600) / 60);
             }
-
-            // Limitar los segundos si los minutos están limitados
-            minutesInput.addEventListener('input', function() {
-                var currentMinutes = parseFloat(minutesInput.value);
-                if (currentMinutes >= parseFloat(minutesInput.max)) {
-                    secondsInput.max = Math.floor(durationInSeconds % 60);
-                } else {
-                    secondsInput.max = 59; // Límite máximo estándar de segundos
-                }
-            });
         });
 
         var savedTime = localStorage.getItem('videoTime_' + videoId);
@@ -75,16 +79,20 @@ document.addEventListener('DOMContentLoaded', function() {
         var hours = parseFloat(hoursInput.value) || 0;
         var minutes = parseFloat(minutesInput.value) || 0;
         var seconds = parseFloat(secondsInput.value) || 0;
-        
+
         // Limitar los valores de minutos y segundos según la duración del video
         var durationInSeconds = video.duration;
         if (durationInSeconds < 3600) {
             hours = 0;
             hoursInput.value = 0;
         }
-        if (minutes > parseFloat(minutesInput.max)) {
-            minutes = parseFloat(minutesInput.max);
-            minutesInput.value = minutes;
+        if (durationInSeconds < 60) {
+            minutes = 0;
+            minutesInput.value = 0;
+        }
+        if (minutes > 59) {
+            minutes = 59;
+            minutesInput.value = 59;
         }
         if (seconds > 59) {
             seconds = 59;
