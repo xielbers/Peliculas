@@ -8,6 +8,13 @@
     <title>Reproductor de Video</title>
 </head>
 <body>
-    <video controls playsinline autoplay id="playerVideo"></video>
+    <div id="controls">
+        <button id="playPauseBtn">Play/Pause</button>
+        <input type="number" id="hoursInput" placeholder="Horas" min="0" max="0" disabled>
+        <input type="number" id="minutesInput" placeholder="Minutos" min="0" max="59">
+        <input type="number" id="secondsInput" placeholder="Segundos" min="0" max="59">
+        <button id="seekBtn">Ir</button>
+    </div>
+    <video controls playsinline id="playerVideo"></video>
 </body>
 </html>
