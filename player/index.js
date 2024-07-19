@@ -1,3 +1,22 @@
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+        .then(function(registration) {
+            console.log('Service Worker registered with scope:', registration.scope);
+
+            // Send message to Service Worker to cache the video
+            var videoId = localStorage.getItem('videoId');
+            if (videoId) {
+                registration.active.postMessage({
+                    action: 'cacheVideo',
+                    videoId: videoId
+                });
+            }
+        })
+        .catch(function(error) {
+            console.log('Service Worker registration failed:', error);
+        });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     var videoId = localStorage.getItem('videoId');
     var video = document.getElementById('playerVideo');
@@ -35,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.currentTime += 10;
                 break;
             case 'Enter':
+            case ' ':
                 if (video.paused) {
                     video.play();
                 } else {
