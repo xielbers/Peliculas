@@ -63,4 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
     });
+
+    window.addEventListener('beforeunload', function(event) {
+        event.preventDefault();
+        event.returnValue = '¿Seguro que quieres salir de la página?';
+    });
 });
