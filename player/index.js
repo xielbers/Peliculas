@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var video = document.getElementById('playerVideo');
 
     if (videoId) {
-        video.src = 'https://pixeldrain.com/api/file/' + videoId;
+        video.src = 'https://drive.google.com/file/d/' + videoId + '/preview';
 
         video.addEventListener('loadedmetadata', function() {
             var savedTime = localStorage.getItem('videoTime_' + videoId);
@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         alert('No se encontró el ID del video.');
+        window.location.href = '../index.html';
     }
 
     document.addEventListener('keydown', function(event) {

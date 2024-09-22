@@ -10,7 +10,7 @@ self.addEventListener('message', function(event) {
 
 async function cacheVideo() {
     const cache = await caches.open(CACHE_NAME);
-    const videoUrl = 'https://pixeldrain.com/api/file/' + videoId;
+    const videoUrl = 'https://drive.google.com/file/d/' + videoId + '/preview';
 
     try {
         const response = await fetch(videoUrl);
