@@ -4,7 +4,7 @@ self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open('static-cache-v1').then(function(cache) {
             return cache.addAll([
-                '/'
+                '../'
             ]);
         })
     );

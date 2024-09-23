@@ -8,7 +8,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     var videoId = localStorage.getItem('videoId');
     var iframe = document.getElementById('playerIframe');
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (videoId) {
-        // Cargar el video desde Google Drive sin lógica de tiempo
+        // Cargar el video desde Google Drive
         iframe.src = 'https://drive.google.com/file/d/' + videoId + '/preview';
     } else {
         alert('No se encontró el ID del video.');
