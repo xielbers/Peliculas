@@ -1,3 +1,13 @@
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('../sw.js').then(function(registration) {
+            console.log('Service Worker registrado con éxito:', registration.scope);
+        }).catch(function(error) {
+            console.log('Error al registrar el Service Worker:', error);
+        });
+    });
+}
+
 function LogIn() {
     var contraseñas = ['110528', '298465']; // Las contraseñas deben ser cadenas
 
