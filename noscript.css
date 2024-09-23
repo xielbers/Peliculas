@@ -1,0 +1,13 @@
+/* Ocultar todo el contenido si JavaScript está desactivado */
+noscript * {
+    display: none !important;
+}
+
+/* Puedes mostrar un mensaje personalizado cuando JS esté desactivado */
+noscript::before {
+    content: "JavaScript está desactivado. Por favor, habilítalo para ver el contenido.";
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+}
