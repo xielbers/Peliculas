@@ -33,9 +33,9 @@ function LogIn() {
 
     // Redirigir según la contraseña
     if (savedPass == '298465') {
-        window.location.href = '/Usuarios/edith.html';
+        window.location.href = 'Usuarios/edith.html';
     } else if (savedPass == '110528') {
-        window.location.href = '/Usuarios/main.html';
+        window.location.href = 'Usuarios/main.html';
     }
 }
 

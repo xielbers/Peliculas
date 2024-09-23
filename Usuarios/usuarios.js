@@ -20,13 +20,13 @@ function Check() {
 
     // Si la contraseña es '110528' pero no está en main.html, redirigir a main.html
     if (savedPass == '110528' && !currentLocation.includes('main.html')) {
-        window.location.href = '/Usuarios/main.html';
+        window.location.href = 'Usuarios/main.html';
         return;
     }
 
     // Si la contraseña es '298465' pero no está en edith.html, redirigir a edith.html
     if (savedPass == '298465' && !currentLocation.includes('edith.html')) {
-        window.location.href = '/Usuarios/edith.html';
+        window.location.href = 'Usuarios/edith.html';
         return;
     }
 
