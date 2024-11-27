@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var video = document.getElementById('playerVideo');
 
   // Maneja la falta videoId
-
   if (!videoId) {
     alert('No se encontró el ID del video.');
     window.location.href = '../index.html';
@@ -32,6 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Agregar los controles de teclado
     document.addEventListener('keydown', function(event) {
+      // Función para pausar o reanudar con retraso
+      function togglePlayPauseWithDelay() {
+        let delay = 200; // Ajusta el retraso en milisegundos según sea necesario
+        setTimeout(() => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }, delay);
+      }
+
       switch (event.key) {
         case 'ArrowLeft':
           video.currentTime -= 10;
@@ -41,11 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
           break;
         case 'Enter':
         case ' ':
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
-          }
+          togglePlayPauseWithDelay();
           break;
       }
 
