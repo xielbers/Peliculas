@@ -26,7 +26,7 @@ if ('serviceWorker' in navigator) {
     let filmSrc;
     if (plataforma === 'pixeldrain') {
       // Reemplazar con el código de inserción de Pixeldrain (si corresponde)
-      videoSrc = `https://pixeldrain.com/api/file/${videoId}`;
+      filmSrc = `https://pixeldrain.com/api/file/${videoId}`;
       video.src = filmSrc;
       video.style = 'display: flex';
   
@@ -62,7 +62,7 @@ if ('serviceWorker' in navigator) {
         localStorage.setItem(uniqueKey, video.currentTime);
       });
     } else if (plataforma === 'drive') {
-      videoSrc = `https://drive.google.com/file/d/${videoId}/preview`;
+      filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
       iframe.src = filmSrc;
       iframe.style = 'display: flex';
     } else {
