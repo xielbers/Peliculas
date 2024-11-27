@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (plataforma === 'pixeldrain') {
     // Reemplazar con el código de inserción de Pixeldrain (si corresponde)
     filmSrc = `https://pixeldrain.com/api/file/${videoId}`;
-    video.src = filmSrc;
     video.style = 'display: flex';
+    video.src = filmSrc;
 
     // Obtener el tiempo guardado
     const uniqueKey = `${videoId}_${plataforma}`;
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   } else if (plataforma === 'drive') {
     filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
-    iframe.src = filmSrc;
     iframe.style = 'display: flex';
+    iframe.src = filmSrc;
   } else {
     console.error(`Plataforma '${plataforma}' no reconocida.`);
     return;
