@@ -8,6 +8,11 @@ if ('serviceWorker' in navigator) {
     });
   }
   
+  let aElements = document.getElementsByTagName('a');
+  document.addEventListener('click', aElements = function() {
+    event.preventDefault();
+  });
+
   function VideoID(videoId, plataforma) {
     localStorage.setItem('videoId', videoId);
   
