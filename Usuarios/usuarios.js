@@ -1,27 +1,46 @@
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-        navigator.serviceWorker.register('../sw.js').then(function(registration) {
-            console.log('Service Worker registrado con éxito:', registration.scope);
-        }).catch(function(error) {
-            console.log('Error al registrar el Service Worker:', error);
-        });
+      navigator.serviceWorker.register('../sw.js').then(function(registration) {
+        console.log('Service Worker registrado con éxito:', registration.scope);
+      }).catch(function(error) {
+        console.log('Error al registrar el Service Worker:', error);
+      });
     });
-}
-
-function VideoID(videoId) {
+  }
+  
+  function VideoID(videoId, plataforma) {
     localStorage.setItem('videoId', videoId);
-    window.location.href = '../player/player.html';
-}
-
-function VideoClear(videoId) {
-    localStorage.removeItem('videoTime_' + videoId);
+  
+    // Determina la URL del video según la plataforma
+    let videoUrl;
+    if (plataforma.toLowerCase() === 'pixeldrain') {
+      videoUrl = `https://pixeldrain.com/api/file/${videoId}`; // Reemplaza con el formato de URL de Pixeldrain
+    } else if (plataforma.toLowerCase() === 'drive') {
+      videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+    } else {
+      console.error(`Plataforma '${plataforma}' no reconocida.`);
+      return; // Maneja la plataforma no válida
+    }
+  
+    localStorage.setItem('plataforma', plataforma);
+    window.location.href = videoUrl;
+  }
+  
+  function VideoClear() {
+    const videoId = localStorage.getItem('videoId');
+    const plataforma = localStorage.getItem('plataforma');
+  
+    // Construir una clave única combinando el videoId y la plataforma
+    const uniqueKey = `${videoId}_${plataforma}`;
+  
+    localStorage.removeItem(uniqueKey);
     alert('Tiempo guardado eliminado.');
-}
-
-let savedPass = localStorage.getItem('pass');
-let currentLocation = window.location.href;
-
-function Check() {
+  }
+  
+  let savedPass = localStorage.getItem('pass');
+  let currentLocation = window.location.href;
+  
+  function Check() {
     // Si no hay ninguna contraseña en localStorage, redirigir inmediatamente a index.html
     if (!savedPass) {
         window.location.href = '../index.html'; // Redirigir si no hay contraseña almacenada
