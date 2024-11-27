@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
     }
   
     localStorage.setItem('plataforma', plataforma);
-    window.location.href = videoUrl;
+    window.location.href = '../player/player.html';
   }
   
   function VideoClear() {
