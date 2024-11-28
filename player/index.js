@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(event) {
       // Función para pausar o reanudar con retraso
       function togglePlayPauseWithDelay() {
-        let delay = 200; // Ajusta el retraso en milisegundos según sea necesario
+        let delay = 400; // Ajusta el retraso en milisegundos según sea necesario
         setTimeout(() => {
           if (video.paused) {
             video.play();
