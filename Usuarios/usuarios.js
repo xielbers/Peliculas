@@ -79,7 +79,7 @@ if ('serviceWorker' in navigator) {
 }
 
   function LogOut() {
-    localStorage.clear(pass);
+    localStorage.clear('pass');
     window.location.reload();
   }
 
