@@ -78,5 +78,10 @@ if ('serviceWorker' in navigator) {
     window.location.href = '../index.html';
 }
 
+  function LogOut() {
+    localStorage.clear(pass);
+    window.location.reload();
+  }
+
 // Asignar la función Check al evento window.onload correctamente
 window.onload = Check;
