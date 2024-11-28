@@ -54,12 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
         case ' ':
           togglePlayPauseWithDelay();
           break;
-      }
+      }})
 
-      // Guardar el tiempo cada 15 segundos
-      setInterval(() => {
-        localStorage.setItem(uniqueKey, video.currentTime);
-      }, 15000);
+      video.addEventListener('timeupdate', function() {
+        var currentTime = video.currentTime - 15;
+        localStorage.setItem(`${videoId}_${plataforma}`, currentTime > 0 ? currentTime : 0);
+    });
+
+    video.addEventListener('ended', function() {
+        localStorage.removeItem(`${videoId}_${plataforma}`);
     });
   } else if (plataforma === 'drive') {
     filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
