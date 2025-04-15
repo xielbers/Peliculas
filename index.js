@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
 }
 
 function LogIn() {
-    var contraseñas = ['110528', '298465', '995434']; // Las contraseñas deben ser cadenas
+    var contraseñas = ['110528', '298465', '995434', 'Pusipusipusi34']; // Las contraseñas deben ser cadenas
 
     // Verificamos si la contraseña guardada es válida
     let savedPass = localStorage.getItem('pass');
@@ -38,6 +38,8 @@ function LogIn() {
         window.location.href = 'Usuarios/main.html';
     } else if (savedPass == '995434') {
         window.location.href = 'Usuarios/tecnica.html';
+    } else if (savedPass == 'Pusipusipusi34') {
+        window.location.href = 'Usuarios/thiago.html';
     }
 }
 

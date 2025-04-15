@@ -74,16 +74,29 @@ if ('serviceWorker' in navigator) {
         return;
     }
 
-    // Si la contraseña es '298465' y el usuario ya está en edith.html, no hacer nada
+    // Si la contraseña es '995434' y el usuario ya está en tecnica.html, no hacer nada
     if (savedPass == '995434' && currentLocation.includes('tecnica.html')) {
       return;
     }
   
-    // Si la contraseña es '110528' pero no está en main.html, redirigir a main.html
+    // Si la contraseña es '995434' pero no está en tecnica.html, redirigir a tecnica.html
     if (savedPass == '995434' && !currentLocation.includes('tecnica.html')) {
       window.location.href = 'Usuarios/tecnica.html';
       return;
     }
+
+        // Si la contraseña es 'Pusipusipusi34' y el usuario ya está en thiago.html, no hacer nada
+        if (savedPass == 'Pusipusipusi34' && currentLocation.includes('thiago.html')) {
+          return;
+        }
+      
+        // Si la contraseña es 'Pusipusipusi34' pero no está en thiago.html, redirigir a thiago.html
+        if (savedPass == 'Pusipusipusi34' && !currentLocation.includes('thiago.html')) {
+          window.location.href = 'Usuarios/tecnica.html';
+          return;
+        }
+
+
 
     // Si la contraseña es incorrecta, redirigir a index.html
     window.location.href = '../index.html';
