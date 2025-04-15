@@ -74,6 +74,17 @@ if ('serviceWorker' in navigator) {
         return;
     }
 
+    // Si la contraseña es '298465' y el usuario ya está en edith.html, no hacer nada
+    if (savedPass == '995434' && currentLocation.includes('tecnica.html')) {
+      return;
+    }
+  
+    // Si la contraseña es '110528' pero no está en main.html, redirigir a main.html
+    if (savedPass == '995434' && !currentLocation.includes('tecnica.html')) {
+      window.location.href = 'Usuarios/main.html';
+      return;
+    }
+
     // Si la contraseña es incorrecta, redirigir a index.html
     window.location.href = '../index.html';
 }

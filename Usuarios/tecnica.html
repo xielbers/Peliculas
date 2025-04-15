@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <noscript>
+        <style>
+            /* Ocultar todo el contenido si JavaScript está desactivado */
+* {
+    display: none !important;
+}
+
+/* Puedes mostrar un mensaje personalizado cuando JS esté desactivado */
+noscript::before {
+    content: "JavaScript está desactivado. Por favor, habilítalo para ver el contenido.";
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+}
+        </style>
+    </noscript>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="usuarios.js"></script>
+    <script src="../InAPP/inapp.js"></script>
+    <link rel="stylesheet" href="../InAPP/inapp.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>Películas</title>
+</head>
+<body>
+    <div id="appActualizacion">
+        <h1>Se recomienda <a href="../InAPP/Peliculas.apk">actualizar</a> la aplicación para disfrutar las nuevas funcionalidades y evitar incompatibilidades</h1>
+    </div>
+
+    <ul>
+        <li>
+            <a href="#" onclick="VideoID('vpV9GbKi', 'pixeldrain')">Una Pelicula de Minecraft</a>
+            <button onclick="VideoClear('vpV9GbKi', 'pixeldrain')">Eliminar tiempo</button>
+        </li>
+    </ul>
+    <button onclick="LogOut()">Cerrar Sesión</button>
+</body>
+</html>
