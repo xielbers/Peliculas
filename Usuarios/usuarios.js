@@ -81,7 +81,7 @@ if ('serviceWorker' in navigator) {
   
     // Si la contraseña es '110528' pero no está en main.html, redirigir a main.html
     if (savedPass == '995434' && !currentLocation.includes('tecnica.html')) {
-      window.location.href = 'Usuarios/main.html';
+      window.location.href = 'Usuarios/tecnica.html';
       return;
     }
 
