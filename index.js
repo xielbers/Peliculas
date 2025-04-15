@@ -9,7 +9,7 @@ if ('serviceWorker' in navigator) {
 }
 
 function LogIn() {
-    var contraseñas = ['110528', '298465']; // Las contraseñas deben ser cadenas
+    var contraseñas = ['110528', '298465', '995434']; // Las contraseñas deben ser cadenas
 
     // Verificamos si la contraseña guardada es válida
     let savedPass = localStorage.getItem('pass');
@@ -36,6 +36,8 @@ function LogIn() {
         window.location.href = 'Usuarios/edith.html';
     } else if (savedPass == '110528') {
         window.location.href = 'Usuarios/main.html';
+    } else if (savedPass == '995434') {
+        window.location.href = 'Usuarios/tecnica.html';
     }
 }
 
