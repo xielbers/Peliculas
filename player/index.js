@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.addEventListener('beforeunload', function(event) {
     event.preventDefault();
+    video.pause();
     event.returnValue = '¿Seguro que quieres salir de la página?';
   });
 });
