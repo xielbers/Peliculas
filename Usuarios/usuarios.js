@@ -103,7 +103,7 @@ if ('serviceWorker' in navigator) {
 }
 
   function LogOut() {
-    localStorage.clear('pass');
+    localStorage.removeItem('pass');
     window.location.reload();
   }
 
