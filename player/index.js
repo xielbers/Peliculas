@@ -64,8 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
     video.addEventListener('ended', function() {
         localStorage.removeItem(`${videoId}_${plataforma}`);
     });
-  } else if (plataforma === 'iframe') {
-    filmSrc = `${videoId}`;
+  } else if (plataforma === 'drive') {
+    filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
+    iframe.style = 'display: flex';
+    iframe.src = filmSrc;
+  } else if (plataforma === 'pixeliframe') {
+    filmSrc = `https://pixeldrain.com/u/${videoId}?embed&style=solarized_light`;
     iframe.style = 'display: flex';
     iframe.src = filmSrc;
   } else {
