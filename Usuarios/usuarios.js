@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
     } else if (plataforma.toLowerCase() === 'drive') {
       videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
     } else if (plataforma.toLowerCase() === 'pixeliframe') {
-      videoUrl = `https://pixeldrain.com/u/${videoId}?embed&style=solarized_light`;
+      videoUrl = `https://pixeldrain.com/u/${videoId}`;
     } else {
       console.error(`Plataforma '${plataforma}' no reconocida.`);
       return; // Maneja la plataforma no válida
