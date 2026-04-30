@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     iframe.style = 'display: flex';
     iframe.src = filmSrc;
   } else if (plataforma === 'pixeliframe') {
-    filmSrc = `https://pixeldrain.com/u/${videoId`;
+    filmSrc = `https://pixeldrain.com/u/${videoId}`;
     iframe.style = 'display: flex';
     iframe.src = filmSrc;
   } else {
