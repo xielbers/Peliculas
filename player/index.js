@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
     video.addEventListener('ended', function() {
         localStorage.removeItem(`${videoId}_${plataforma}`);
     });
-  } else if (plataforma === 'drive') {
-    filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
+  } else if (plataforma === 'iframe') {
+    filmSrc = `${videoId}`;
     iframe.style = 'display: flex';
     iframe.src = filmSrc;
   } else {
