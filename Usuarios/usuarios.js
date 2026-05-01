@@ -18,8 +18,8 @@ if ('serviceWorker' in navigator) {
   
     // Determina la URL del video según la plataforma
     let videoUrl;
-    if (plataforma.toLowerCase() === 'pixeldrain') {
-      videoUrl = `https://pixeldrain.com/api/file/${videoId}`; // Reemplaza con el formato de URL de Pixeldrain
+    if (plataforma.toLowerCase() === 'mediafire') {
+      videoUrl = `${videoId}`;
     } else if (plataforma.toLowerCase() === 'drive') {
       videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
     } else if (plataforma.toLowerCase() === 'filesfm') {

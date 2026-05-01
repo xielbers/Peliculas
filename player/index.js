@@ -14,9 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const plataforma = localStorage.getItem('plataforma');
   let filmSrc;
 
-  if (plataforma === 'pixeldrain') {
-    // Reemplazar con el código de inserción de Pixeldrain (si corresponde)
-    filmSrc = `https://pixeldrain.com/api/file/${videoId}`;
+  if (plataforma === 'mediafire') {
+    filmSrc = `${videoId}`;
     video.style = 'display: flex';
     video.src = filmSrc;
 
