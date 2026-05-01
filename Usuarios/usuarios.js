@@ -22,8 +22,8 @@ if ('serviceWorker' in navigator) {
       videoUrl = `https://pixeldrain.com/api/file/${videoId}`; // Reemplaza con el formato de URL de Pixeldrain
     } else if (plataforma.toLowerCase() === 'drive') {
       videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
-    } else if (plataforma.toLowerCase() === 'pixeliframe') {
-      videoUrl = `https://pixeldrain.com/u/${videoId}`;
+    } else if (plataforma.toLowerCase() === 'filesfm') {
+      videoUrl = `https://files.fm/f/${videoId}?hide_header=true&hide_menus=true`;
     } else {
       console.error(`Plataforma '${plataforma}' no reconocida.`);
       return; // Maneja la plataforma no válida

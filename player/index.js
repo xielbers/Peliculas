@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
     filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
     iframe.style = 'display: flex';
     iframe.src = filmSrc;
-  } else if (plataforma === 'pixeliframe') {
-    filmSrc = `https://pixeldrain.com/u/${videoId}`;
+  } else if (plataforma === 'filesfm') {
+    filmSrc = `https://files.fm/f/${videoId}?hide_header=true&hide_menus=true`;
     iframe.style = 'display: flex';
     iframe.src = filmSrc;
   } else {
