@@ -1,37 +1,18 @@
-self.addEventListener('install', function(event) {
-    console.log('Service Worker instalado');
-    
-    event.waitUntil(
-        caches.open('static-cache-v1').then(function(cache) {
-            return cache.addAll([
-                '../'
-            ]);
-        })
-    );
+const CACHE_NAME = "offline-cache-v1";
+const OFFLINE_URL = "offline.html";
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll([OFFLINE_URL]);
+    })
+  );
 });
 
-self.addEventListener('activate', function(event) {
-    console.log('Service Worker activado');
-    
-    event.waitUntil(
-        caches.keys().then(function(cacheNames) {
-            return Promise.all(
-                cacheNames.map(function(cacheName) {
-                    if (cacheName !== 'static-cache-v1') {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
-    );
-});
-
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request).catch(function() {
-                return caches.match('/offline.html');
-            });
-        })
-    );
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      return caches.match(OFFLINE_URL);
+    })
+  );
 });
