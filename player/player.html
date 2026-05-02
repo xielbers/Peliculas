@@ -31,9 +31,10 @@ noscript::before {
     <video controls playsinline id="playerVideo" preload="auto" controlslist="nodownload" type="video/mp4" allowfullscreen></video>
 
     <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("../sw.js");
-}
+    if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("../sw.js");
+    console.log("Service Worked Registed");
+    }
 </script>
 </body>
 </html>
