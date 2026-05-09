@@ -1,84 +1,149 @@
 document.addEventListener('DOMContentLoaded', function() {
+
   var videoId = localStorage.getItem('videoId');
   var iframe = document.getElementById('playerIframe');
   var video = document.getElementById('playerVideo');
 
-  // Maneja la falta videoId
   if (!videoId) {
     alert('No se encontró el ID del video.');
     window.location.href = '../index.html';
     return;
   }
 
-  // Usa la plataforma almacenada en localStorage para determinar la fuente del video
   const plataforma = localStorage.getItem('plataforma');
   let filmSrc;
 
+  // ================= MEDIAFIRE =================
+
   if (plataforma === 'mediafire') {
+
     filmSrc = `${videoId}`;
-    video.style = 'display: flex';
+
+    video.style.display = 'flex';
     video.src = filmSrc;
 
-    // Obtener el tiempo guardado
     const uniqueKey = `${videoId}_${plataforma}`;
     const savedTime = localStorage.getItem(uniqueKey);
 
-    // Si hay un tiempo guardado, establecerlo como el tiempo actual
     if (savedTime) {
-      video.currentTime = savedTime;
+
+      video.addEventListener('loadedmetadata', function() {
+        video.currentTime = parseFloat(savedTime);
+      });
+
     }
 
-    // Agregar los controles de teclado
     document.addEventListener('keydown', function(event) {
-      // Función para pausar o reanudar con retraso
-      function togglePlayPauseWithDelay() {
-        let delay = 400; // Ajusta el retraso en milisegundos según sea necesario
-        setTimeout(() => {
+
+      switch (event.key) {
+
+        case 'ArrowLeft':
+          video.currentTime -= 10;
+          break;
+
+        case 'ArrowRight':
+          video.currentTime += 10;
+          break;
+
+        case 'Enter':
+        case ' ':
+
           if (video.paused) {
             video.play();
           } else {
             video.pause();
           }
-        }, delay);
+
+          break;
       }
+    });
 
-      switch (event.key) {
-        case 'ArrowLeft':
-          video.currentTime -= 10;
-          break;
-        case 'ArrowRight':
-          video.currentTime += 10;
-          break;
-        case 'Enter':
-        case ' ':
-          togglePlayPauseWithDelay();
-          break;
-      }})
+    video.addEventListener('timeupdate', function() {
 
-      video.addEventListener('timeupdate', function() {
-        var currentTime = video.currentTime - 15;
-        localStorage.setItem(`${videoId}_${plataforma}`, currentTime > 0 ? currentTime : 0);
+      var currentTime = video.currentTime - 15;
+
+      localStorage.setItem(
+        uniqueKey,
+        currentTime > 0 ? currentTime : 0
+      );
+
     });
 
     video.addEventListener('ended', function() {
-        localStorage.removeItem(`${videoId}_${plataforma}`);
+      localStorage.removeItem(uniqueKey);
     });
-  } else if (plataforma === 'drive') {
-    filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
-    iframe.style = 'display: flex';
+
+  }
+
+  // ================= DRIVE =================
+
+  else if (plataforma === 'drive') {
+
+    const uniqueKey = `${videoId}_${plataforma}`;
+    const savedTime = localStorage.getItem(uniqueKey);
+
+    let startTime = '';
+
+    if (savedTime) {
+      startTime = `?t=${Math.floor(savedTime)}`;
+    }
+
+    filmSrc = `https://drive.google.com/file/d/${videoId}/preview?t=${startTime}`;
+
+    iframe.style.display = 'flex';
     iframe.src = filmSrc;
-  } else if (plataforma === 'filesfm') {
+
+    // Guardar tiempo manualmente
+    // Necesitas enviar el tiempo desde el iframe usando postMessage
+    // porque Google Drive bloquea acceso directo al video
+
+    window.addEventListener('message', function(event) {
+
+      if (event.data.currentTime) {
+
+        var currentTime = event.data.currentTime - 15;
+
+        localStorage.setItem(
+          uniqueKey,
+          currentTime > 0 ? currentTime : 0
+        );
+
+      }
+
+      if (event.data.ended) {
+        localStorage.removeItem(uniqueKey);
+      }
+
+    });
+
+  }
+
+  // ================= FILESFM =================
+
+  else if (plataforma === 'filesfm') {
+
     filmSrc = `https://files.fm/f/${videoId}?hide_header=true&hide_menus=true`;
-    iframe.style = 'display: flex';
+
+    iframe.style.display = 'flex';
     iframe.src = filmSrc;
-  } else {
+
+  }
+
+  else {
+
     console.error(`Plataforma '${plataforma}' no reconocida.`);
     return;
   }
 
   window.addEventListener('beforeunload', function(event) {
+
+    if (video) {
+      video.pause();
+    }
+
     event.preventDefault();
-    video.pause();
-    event.returnValue = '¿Seguro que quieres salir de la página?';
+    event.returnValue = '';
+
   });
+
 });
