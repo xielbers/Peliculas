@@ -78,43 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // ================= DRIVE =================
 
   else if (plataforma === 'drive') {
-
-    const uniqueKey = `${videoId}_${plataforma}`;
-    const savedTime = localStorage.getItem(uniqueKey);
-
-    let startTime = '';
-
-    if (savedTime) {
-      startTime = `?t=${Math.floor(savedTime)}`;
-    }
-
-    filmSrc = `https://drive.google.com/file/d/${videoId}/preview?t=${startTime}`;
+    
+    filmSrc = `https://drive.google.com/file/d/${videoId}/preview`;
 
     iframe.style.display = 'flex';
     iframe.src = filmSrc;
-
-    // Guardar tiempo manualmente
-    // Necesitas enviar el tiempo desde el iframe usando postMessage
-    // porque Google Drive bloquea acceso directo al video
-
-    window.addEventListener('message', function(event) {
-
-      if (event.data.currentTime) {
-
-        var currentTime = event.data.currentTime - 15;
-
-        localStorage.setItem(
-          uniqueKey,
-          currentTime > 0 ? currentTime : 0
-        );
-
-      }
-
-      if (event.data.ended) {
-        localStorage.removeItem(uniqueKey);
-      }
-
-    });
 
   }
 
